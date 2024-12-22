@@ -242,7 +242,7 @@ def lambda_handler():
                 url = "https://hieuphp.name.vn/api/undetected/undetected.php?all=1"
                 updatestatus1=updatestatus(namefolder,url,getcookie)
                 print(f"update sesion theo namefolder: {updatestatus1}")
-        time.sleep(1000) 
+        time.sleep(0) 
         #fetch_data_from_api(url)      
         if int(testbodyelement) ==1:
             body_element = driver.find_element("tag name", "body").text
