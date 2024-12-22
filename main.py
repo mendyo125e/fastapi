@@ -51,7 +51,8 @@ async def read_index():
 
 @app.get("/items/{item_id}")
 def read_item(item_id: int, q: Optional[str] = None):
-    print("abc")
-    lambda_handler()
-    print("cccc")
-    return {"item_id123": item_id, "q": q}
+    if item_id==123:
+        print("abc")
+        lambda_handler()
+        print("cccc")
+    return {"item_id": item_id, "q": q}
