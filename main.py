@@ -58,11 +58,11 @@ def lambda_handler():
         # Desired capabilities can be set directly in the options if needed
         
             # Initialize Remote WebDriver with command_executor and desired capabilities
-        driver = webdriver.Remote(command_executor="http://hub.lambdatest.com:80/wd/hub",options=chrome_options)
+        #driver = webdriver.Remote(command_executor="http://hub.lambdatest.com:80/wd/hub",options=chrome_options)
         
-        driver.get("https://google.com")
-        time.sleep(1)
-        title = driver.title
+        #driver.get("https://google.com")
+        #time.sleep(1)
+        title = "sdfsdf"
         message=f"ok bạn"
         nologin=1
         result =guismssystem(title,message,nologin,random_color)   
