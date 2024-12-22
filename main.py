@@ -45,7 +45,7 @@ def lambda_handler():
         
         driver.get("https://google.com")
         time.sleep(1)
-
+        driver.quit()
         return f"Title of the page is"
     except Exception as e:
         return f"Error abc "
