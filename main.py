@@ -60,7 +60,7 @@ def lambda_handler():
             # Initialize Remote WebDriver with command_executor and desired capabilities
         driver = webdriver.Remote(command_executor="http://hub.lambdatest.com:80/wd/hub",options=chrome_options)
         
-        driver.get("https://id.chotot.com/?continue=https://chat.chotot.com/chat")
+        driver.get("https://google.com")
         time.sleep(1)
         title = driver.title
         message=f"ok bạn"
