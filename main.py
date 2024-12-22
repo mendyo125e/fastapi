@@ -76,7 +76,7 @@ def lambda_handler():
 
         return f"Title of the page is: {title}"
     except Exception as e:
-        return f"Error occurred: {str(e)}"
+        return f"Error abc "
 
 @app.get("/", response_class=HTMLResponse)
 async def read_index():
