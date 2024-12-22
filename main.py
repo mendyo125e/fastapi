@@ -8,6 +8,8 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
 import urllib3,urllib.parse
 import random,time
+import os
+import random
 app = FastAPI()
 def random_color_by_name(testcolor):
     if testcolor=="test":
@@ -20,6 +22,34 @@ def random_color_by_name(testcolor):
         ]
     # Chọn ngẫu nhiên một màu
     return random.choice(color_names)
+def updatestatus(user,url,cookie):
+    # Khởi tạo PoolManager
+    http = urllib3.PoolManager()
+    # URL API cần gửi yêu cầu
+    data = {'namefolder': f'{user}',"cookie": cookie,}
+    encoded_data = json.dumps(data).encode('utf-8')
+    response = http.request( 'POST',   url,  body=encoded_data,   headers={'Content-Type': 'application/json'})
+    return {"status_code": response.status,"response": response.data.decode('utf-8')}
+def send_alertzy_notification(account_key, title, message,priority, group, buttons=None):
+    url = "https://alertzy.app/send"
+    data = {"accountKey": account_key,"title": title,"message": message,"group": group,}
+    data["priority"]=priority
+    if buttons:
+        data["buttons"] = json.dumps(buttons)
+    http = urllib3.PoolManager()
+    response = http.request('POST',url,fields=data)
+    return {"status_code": response.status,"response": response.data.decode('utf-8')}
+def guisms(account_key,user,message,chotot):
+    http = urllib3.PoolManager()
+    data = {"token": account_key,"user": user,"message": message,"sound": chotot,}
+    encoded_data = urllib.parse.urlencode(data).encode("utf-8")  # Phải encode thành bytes
+    response = http.request(
+        "POST",
+        "https://api.pushover.net/1/messages.json",
+        body=encoded_data,
+        headers={"Content-Type": "application/x-www-form-urlencoded"},
+    )
+    return {"status_code": response.status,"response": response.data.decode('utf-8')}
 def guismssystem(title,message,nologin,random_color):
     # Khởi tạo PoolManager
     http = urllib3.PoolManager()
@@ -29,15 +59,85 @@ def guismssystem(title,message,nologin,random_color):
     encoded_data = json.dumps(data).encode('utf-8')
     response = http.request( 'POST',   url,  body=encoded_data,   headers={'Content-Type': 'application/json'})
     return {"status_code": response.status,"response": response.data.decode('utf-8')}
+def convert_boolean_values(cookie):
+    # Kiểm tra nếu cookie là kiểu dict
+    if isinstance(cookie, dict):
+        for key, value in cookie.items():
+            if isinstance(value, bool):
+                cookie[key] = value  # Đảm bảo giá trị boolean đúng (True/False)
+    return cookie
+def fetch_data_from_api(url):
+    http = urllib3.PoolManager()
+    response = http.request('GET', url)
+    if response.status == 200:
+        try:
+            data = json.loads(response.data.decode('utf-8'))
+            return data
+        except json.JSONDecodeError:
+            print("Lỗi khi giải mã dữ liệu JSON.")
+            return None
+    else:
+        print(f"Lỗi khi gửi yêu cầu GET, mã trạng thái: {response.status}")
+        return None
 def lambda_handler():
     # Cấu hình trình duyệt
     chrome_options = Options()
     #chrome_options.add_argument("--headless")  # Chạy chế độ không giao diện
     chrome_options.add_argument("--no-sandbox")
     chrome_options.add_argument("--disable-dev-shm-usage")
-    
+    message_value = 0 
+    i=0
+    vonglap=True
+    url = "https://hieuphp.name.vn/api/undetected/systemapi.php?all=1"  
+    data = fetch_data_from_api(url)
+    namesms = data.get("name", None)
+    tokensms = data.get("token", None)
+    usersms = data.get("user", None)
+    random_color = random_color_by_name(namesms)
     # Khởi tạo WebDriver
     try:
+        url = "https://hieuphp.name.vn/api/undetected/getdata.php"  
+            data = fetch_data_from_api(url)
+            try:
+                message_value = data.get("message", None)
+            except Exception as e:
+                message_value=0
+                
+            if message_value!=1:
+                # In dữ liệu trả về (có thể tùy chỉnh để chỉ lấy các trường cụ thể)
+               
+                for record in data:
+                   
+                    #print(f"Email: {record.get('email', 'Không có email')}")
+                    cookie_data=record.get('cookie', 'Không có cookie')
+                    cookies = json.loads(cookie_data)
+                     #cookies = cookie_dict.get("cookies", [])
+                    #print(f"Cookie: {cookies}") 
+                    namefolder=record.get('namefolder', 'Không có namefolder')
+                    #print(f"Name Folder: {namefolder}")
+                    nameapp=record.get('nameapp', 'Không có nameapp')
+                    #print(f"Name App: {nameapp}")
+                    cookieactive=record.get('cookieactive', 'Không có cookieactive')
+                    #print(f"Cookie Active: {cookieactive}")
+                    testversion=record.get('testversion', 'Không có testversion')
+                    #print(f"Test Version: {testversion}")
+                    testbodyelement=record.get('testbodyelement', 'Không có testbodyelement')
+                    #print(f"Test Body Element: {testbodyelement}")
+                    viewtmp=record.get('viewtmp', 'Không có xem tmp')
+                    #print(f"Xem tmp: {viewtmp}")
+                    nhansms=record.get('nhansms', 'Không có nhansms')
+                    #print(f"nhansms: {nhansms}")
+                    noidungtin=record.get('noidungtin', 'Không có noidungtin')
+                    #print(f"noidungtin: {noidungtin}")
+                    status=record.get('status', 'Không có status')
+                    #print(f"Status: {status}") 
+                                       
+            else:
+                print("Đã kiểm tra hết các trang")
+                url = "https://hieuphp.name.vn/api/undetected/updatestatus.php?all=1"  
+                fetch_data_from_api(url)
+                vonglap=False
+                break
         driver = webdriver.Remote(command_executor="https://standalone-chrome-6je7.onrender.com/wd/hub",options=chrome_options)
         
         driver.get("https://google.com")
