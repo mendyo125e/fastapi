@@ -40,6 +40,14 @@ def lambda_handler():
 
 app = FastAPI()
 
+@app.get("/items/{item_id}")
+def read_item(item_id: int, q: Optional[str] = None):
+    if item_id==123:
+        print("abc")
+        lambda_handler()
+        print("cccc")
+    return {"item_id": item_id, "q": q}
+
 @app.get("/", response_class=HTMLResponse)
 async def read_index():
     try:
@@ -48,11 +56,3 @@ async def read_index():
         return HTMLResponse(content=html_content, status_code=200)
     except FileNotFoundError:
         return {"error": "index.html not found"}
-
-@app.get("/items/{item_id}")
-def read_item(item_id: int, q: Optional[str] = None):
-    if item_id==123:
-        print("abc")
-        lambda_handler()
-        print("cccc")
-    return {"item_id": item_id, "q": q}
