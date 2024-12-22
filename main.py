@@ -39,7 +39,7 @@ def lambda_handler():
     # Khởi tạo WebDriver
     try:
         random_color = random_color_by_name("test")
-        # chrome_options = Options()
+        chrome_options = Options()
         
         chrome_options.browser_version = "130"
         chrome_options.platform_name = "Windows 10"
@@ -58,10 +58,10 @@ def lambda_handler():
         # Desired capabilities can be set directly in the options if needed
         
             # Initialize Remote WebDriver with command_executor and desired capabilities
-        #driver = webdriver.Remote(command_executor="http://hub.lambdatest.com:80/wd/hub",options=chrome_options)
+        driver = webdriver.Remote(command_executor="http://10.210.92.158:4444/wd/hub",options=chrome_options)
         
-        #driver.get("https://google.com")
-        #time.sleep(1)
+        driver.get("https://google.com")
+        time.sleep(1)
         title = "sdfsdf"
         message=f"ok bạn"
         nologin=1
