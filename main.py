@@ -44,7 +44,7 @@ def lambda_handler():
         driver = webdriver.Remote(command_executor="https://standalone-chrome-6je7.onrender.com/wd/hub",options=chrome_options)
         
         driver.get("https://google.com")
-
+        time.sleep(2)
         driver.quit()
         return f"Title of the page is"
     except Exception as e:
