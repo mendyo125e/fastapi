@@ -45,17 +45,6 @@ def lambda_handler():
         
         driver.get("https://google.com")
         time.sleep(1)
-        title = "sdfsdf"
-        message=f"ok bạn"
-        nologin=1
-        result =guismssystem(title,message,nologin,random_color)   
-        print("click xong")    
-        
-        # Lấy tiêu đề trang
-       
-        
-        # Đóng trình duyệt
-
 
         return f"Title of the page is: {title}"
     except Exception as e:
