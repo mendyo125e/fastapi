@@ -39,7 +39,7 @@ def lambda_handler():
     # Khởi tạo WebDriver
     try:
         random_color = random_color_by_name("test")
-        chrome_options = Options()
+        # chrome_options = Options()
         
         chrome_options.browser_version = "130"
         chrome_options.platform_name = "Windows 10"
@@ -72,7 +72,7 @@ def lambda_handler():
        
         
         # Đóng trình duyệt
-        driver.quit()
+
 
         return f"Title of the page is: {title}"
     except Exception as e:
