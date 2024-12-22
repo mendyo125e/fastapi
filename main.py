@@ -96,48 +96,48 @@ def lambda_handler():
     random_color = random_color_by_name(namesms)
     # Khởi tạo WebDriver
     try:
-            url = "https://hieuphp.name.vn/api/undetected/getdata.php"  
-            data = fetch_data_from_api(url)
-            try:
-                message_value = data.get("message", None)
-            except Exception as e:
-                message_value=0
-                
-            if message_value!=1:
-                # In dữ liệu trả về (có thể tùy chỉnh để chỉ lấy các trường cụ thể)
+        url = "https://hieuphp.name.vn/api/undetected/getdata.php"  
+        data = fetch_data_from_api(url)
+        try:
+            message_value = data.get("message", None)
+        except Exception as e:
+            message_value=0
+            
+        if message_value!=1:
+            # In dữ liệu trả về (có thể tùy chỉnh để chỉ lấy các trường cụ thể)
+           
+            for record in data:
                
-                for record in data:
-                   
-                    #print(f"Email: {record.get('email', 'Không có email')}")
-                    cookie_data=record.get('cookie', 'Không có cookie')
-                    cookies = json.loads(cookie_data)
-                     #cookies = cookie_dict.get("cookies", [])
-                    #print(f"Cookie: {cookies}") 
-                    namefolder=record.get('namefolder', 'Không có namefolder')
-                    #print(f"Name Folder: {namefolder}")
-                    nameapp=record.get('nameapp', 'Không có nameapp')
-                    #print(f"Name App: {nameapp}")
-                    cookieactive=record.get('cookieactive', 'Không có cookieactive')
-                    #print(f"Cookie Active: {cookieactive}")
-                    testversion=record.get('testversion', 'Không có testversion')
-                    #print(f"Test Version: {testversion}")
-                    testbodyelement=record.get('testbodyelement', 'Không có testbodyelement')
-                    print(f"Test Body Element: {testbodyelement}")
-                    viewtmp=record.get('viewtmp', 'Không có xem tmp')
-                    print(f"Xem tmp: {viewtmp}")
-                    nhansms=record.get('nhansms', 'Không có nhansms')
-                    print(f"nhansms: {nhansms}")
-                    noidungtin=record.get('noidungtin', 'Không có noidungtin')
-                    print(f"noidungtin: {noidungtin}")
-                    status=record.get('status', 'Không có status')
-                    print(f"Status: {status}") 
-                                       
-            else:
-                print("Đã kiểm tra hết các trang")
-                url = "https://hieuphp.name.vn/api/undetected/updatestatus.php?all=1"  
-                fetch_data_from_api(url)
-                vonglap=False
-                break
+                #print(f"Email: {record.get('email', 'Không có email')}")
+                cookie_data=record.get('cookie', 'Không có cookie')
+                cookies = json.loads(cookie_data)
+                 #cookies = cookie_dict.get("cookies", [])
+                #print(f"Cookie: {cookies}") 
+                namefolder=record.get('namefolder', 'Không có namefolder')
+                #print(f"Name Folder: {namefolder}")
+                nameapp=record.get('nameapp', 'Không có nameapp')
+                #print(f"Name App: {nameapp}")
+                cookieactive=record.get('cookieactive', 'Không có cookieactive')
+                #print(f"Cookie Active: {cookieactive}")
+                testversion=record.get('testversion', 'Không có testversion')
+                #print(f"Test Version: {testversion}")
+                testbodyelement=record.get('testbodyelement', 'Không có testbodyelement')
+                print(f"Test Body Element: {testbodyelement}")
+                viewtmp=record.get('viewtmp', 'Không có xem tmp')
+                print(f"Xem tmp: {viewtmp}")
+                nhansms=record.get('nhansms', 'Không có nhansms')
+                print(f"nhansms: {nhansms}")
+                noidungtin=record.get('noidungtin', 'Không có noidungtin')
+                print(f"noidungtin: {noidungtin}")
+                status=record.get('status', 'Không có status')
+                print(f"Status: {status}") 
+                                   
+        else:
+            print("Đã kiểm tra hết các trang")
+            url = "https://hieuphp.name.vn/api/undetected/updatestatus.php?all=1"  
+            fetch_data_from_api(url)
+            vonglap=False
+
         driver = webdriver.Remote(command_executor="https://standalone-chrome-6je7.onrender.com/wd/hub",options=chrome_options)
         
         driver.get("https://google.com")
