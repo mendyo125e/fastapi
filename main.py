@@ -12,7 +12,7 @@ app = FastAPI()
 
 def lambda_handler():
     # Cấu hình trình duyệt
-    chrome_options = ChromeOptions()
+    chrome_options = webdriver.ChromeOptions()
     chrome_options.add_argument("--headless")  # Chạy chế độ không giao diện
     chrome_options.add_argument("--no-sandbox")
     chrome_options.add_argument("--disable-dev-shm-usage")
