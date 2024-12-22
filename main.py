@@ -32,7 +32,7 @@ def guismssystem(title,message,nologin,random_color):
 def lambda_handler():
     # Cấu hình trình duyệt
     chrome_options = Options()
-    chrome_options.add_argument("--headless")  # Chạy chế độ không giao diện
+    #chrome_options.add_argument("--headless")  # Chạy chế độ không giao diện
     chrome_options.add_argument("--no-sandbox")
     chrome_options.add_argument("--disable-dev-shm-usage")
     
