@@ -38,7 +38,7 @@ def lambda_handler():
     
     # Khởi tạo WebDriver
     try:
-        random_color = random_color_by_name("test")
+
         chrome_options = Options()
         
         driver = webdriver.Remote(command_executor="https://standalone-chrome-6je7.onrender.com/wd/hub",options=chrome_options)
