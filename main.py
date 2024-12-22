@@ -1,12 +1,13 @@
 from typing import Optional
 from fastapi import FastAPI
-from fastapi.responses import HTMLResponse
-import aiofiles
+from fastapi.responses import JSONResponse
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
 from webdriver_manager.chrome import ChromeDriverManager
+
+app = FastAPI()
 
 def lambda_handler():
     # Cấu hình trình duyệt
@@ -16,12 +17,12 @@ def lambda_handler():
     chrome_options.add_argument("--disable-dev-shm-usage")
     
     # Khởi tạo WebDriver
-    driver = webdriver.Chrome(
-        service=Service(ChromeDriverManager().install()),
-        options=chrome_options
-    )
-
     try:
+        driver = webdriver.Chrome(
+            service=Service(ChromeDriverManager().install()),
+            options=chrome_options
+        )
+
         # Mở trang web
         driver.get("https://www.chotot.com/")
         
@@ -31,21 +32,15 @@ def lambda_handler():
         # Đóng trình duyệt
         driver.quit()
 
-        return {
-            "statusCode": 200,
-            "body": f"Title of the page is: {title}"
-        }
+        return f"Title of the page is: {title}"
     except Exception as e:
-        driver.quit()
-
-app = FastAPI()
+        return f"Error occurred: {str(e)}"
 
 @app.get("/items/{item_id}")
 def read_item(item_id: int, q: Optional[str] = None):
-    if item_id==123:
-        print("abc")
-        lambda_handler()
-        print("cccc")
+    if item_id == 123:
+        result = lambda_handler()
+        return JSONResponse(content={"item_id": item_id, "result": result})
     return {"item_id": item_id, "q": q}
 
 @app.get("/", response_class=HTMLResponse)
