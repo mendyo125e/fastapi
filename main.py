@@ -1,6 +1,6 @@
 from typing import Optional
 from fastapi import FastAPI
-import aiofiles
+import aiofiles,json
 from fastapi.responses import HTMLResponse, JSONResponse
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
