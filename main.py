@@ -96,7 +96,7 @@ def lambda_handler():
     random_color = random_color_by_name(namesms)
     # Khởi tạo WebDriver
     try:
-        url = "https://hieuphp.name.vn/api/undetected/getdata.php"  
+            url = "https://hieuphp.name.vn/api/undetected/getdata.php"  
             data = fetch_data_from_api(url)
             try:
                 message_value = data.get("message", None)
