@@ -53,5 +53,5 @@ async def read_index():
 def read_item(item_id: int, q: Optional[str] = None):
     print("abc")
     lambda_handler()
-     print("cccc")
+    print("cccc")
     return {"item_id123": item_id, "q": q}
