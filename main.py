@@ -35,13 +35,7 @@ def lambda_handler():
         return f"Title of the page is: {title}"
     except Exception as e:
         return f"Error occurred: {str(e)}"
-@app.get("/items/{item_id}")
-def read_item(item_id: int, q: Optional[str] = None):
-    if item_id == 123:
-        result = lambda_handler()
-        return JSONResponse(content={"item_id": item_id, "result": result})
-    return {"item_id": item_id, "q": q}
-    
+
 @app.get("/", response_class=HTMLResponse)
 async def read_index():
     try:
@@ -50,6 +44,15 @@ async def read_index():
         return HTMLResponse(content=html_content, status_code=200)
     except FileNotFoundError:
         return {"error": "index.html not found"}
+        
+@app.get("/items/{item_id}")
+def read_item(item_id: int, q: Optional[str] = None):
+    if item_id == 123:
+        result = lambda_handler()
+        return JSONResponse(content={"item_id": item_id, "result": result})
+    return {"item_id": item_id, "q": q}
+    
+
         
 
 
