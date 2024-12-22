@@ -41,24 +41,7 @@ def lambda_handler():
         random_color = random_color_by_name("test")
         chrome_options = Options()
         
-        chrome_options.browser_version = "130"
-        chrome_options.platform_name = "Windows 10"
-        lt_options = {};
-        lt_options["username"] = "alexschmidt63ng";
-        lt_options["accessKey"] = "evq0nRPGqRSZOQtu2hcYW2xy18CgxDjUotY1vYFD491PfVxPcd";
-        lt_options["smartUI.project"] = "alexschmidt63ng";
-        lt_options["resolution"] = "1024x768";
-        lt_options["recordVideo"] = "true";
-        lt_options["browserName"] = "Chrome";
-        lt_options["w3c"] = True;
-        lt_options["selenium_version"] = "4.0.0";
-        lt_options["plugin"] = "python-python";
-        chrome_options.set_capability('LT:Options', lt_options);
-        
-        # Desired capabilities can be set directly in the options if needed
-        
-            # Initialize Remote WebDriver with command_executor and desired capabilities
-        driver = webdriver.Remote(command_executor="http://10.210.92.158:4444/wd/hub",options=chrome_options)
+        driver = webdriver.Remote(command_executor="https://standalone-chrome-6je7.onrender.com/wd/hub",options=chrome_options)
         
         driver.get("https://google.com")
         time.sleep(1)
