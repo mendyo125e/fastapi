@@ -177,7 +177,7 @@ def lambda_handler():
 
         time.sleep(1)   
         if passtranglogin==0:
-            timeout = 20
+            timeout = 3
             end_time = time.time() + timeout
             while True:
                 try:
