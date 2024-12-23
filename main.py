@@ -158,7 +158,40 @@ def lambda_handler():
             except Exception as e:
                 print("Lỗi Không tìm thấy 'cookie chat' ")
                 nologin=1
-                
+        else:    
+                url="https://www.chotot.com/my-ads"
+                driver.get(url)    
+                time.sleep(2) 
+                passtranglogin=0
+                try:
+                # Tìm phần tử chứa chữ "Đăng nhập"
+                    login_element = driver.find_element(By.CSS_SELECTOR, ".flex.whitespace-pre").text
+                    if login_element == "Tạo cửa hàng":
+                        print(f"{namefolder} Đã có cookie Chợ Tốt")  # Thông báo nếu tìm thấy
+                        passtranglogin=1
+                        nologin=3
+                        print("Bạn đã login danh sách sản phẩm")
+                except Exception as e:
+                    print("Lỗi Không tìm thấy 'cookie my-ads' ")
+                    nologin=4
+         time.sleep(1)   
+            if passtranglogin==0:
+                timeout = 20
+                end_time = time.time() + timeout
+                while True:
+                    try:
+                    # Tìm phần tử chứa chữ "Đăng nhập"
+                        login_element = driver.find_element(By.CSS_SELECTOR, ".mocked-styled-29.b13ldopu").text
+                        if login_element == "Đăng nhập":
+                            print(f"{namefolder} Chưa đăng nhập")  # Thông báo nếu tìm thấy
+                            cookieactive=1
+                            
+                    except Exception as e:
+                        print("Đợi load đăng nhập xong cái")
+                        time.sleep(1) 
+                    if time.time() > end_time:
+                        print("Lỗi Không tìm thấy chữ 'Đăng nhập' thời gian tối đa") 
+                                   
         time.sleep(1)
         driver.quit()
         return f"Title of the page is"
