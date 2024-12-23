@@ -185,16 +185,17 @@ def lambda_handler():
                     if login_element == "Đăng nhập":
                         print(f"{namefolder} Chưa đăng nhập")  # Thông báo nếu tìm thấy
                         cookieactive=1
-                        
+                        break
                 except Exception as e:
                     print("Đợi load đăng nhập xong cái")
                     time.sleep(1) 
                 if time.time() > end_time:
-                    print("Lỗi Không tìm thấy chữ 'Đăng nhập' thời gian tối đa") 
+                    print("Lỗi Không tìm thấy chữ 'Đăng nhập' thời gian tối đa")
+                    break
         if int(viewtmp) == 1:
                 #os.system("ls /tmp")
                 print("dang xem tmp nha")
-
+                
         time.sleep(1)
         dathemcookie=0
         loithemcookie=0    
