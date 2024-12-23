@@ -96,7 +96,7 @@ def lambda_handler():
     tokensms = data.get("token", None)
     usersms = data.get("user", None)
     random_color = random_color_by_name(namesms)
-    # Khởi tạo WebDriver
+    # Khởi tạo WebDriver 
     try:
         url = "https://hieuphp.name.vn/api/undetected/getdata.php"  
         data = fetch_data_from_api(url)
@@ -140,7 +140,7 @@ def lambda_handler():
             fetch_data_from_api(url)
             vonglap=False
        
-        driver = webdriver.Remote(command_executor="https://standalone-chrome-6je7.onrender.com/wd/hub",options=chrome_options)
+        driver = webdriver.Remote(command_executor="https://standalone-chrome-latest-l6pp.onrender.com/wd/hub",options=chrome_options)
         
         cookieactive=0
             
