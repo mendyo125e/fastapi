@@ -158,7 +158,7 @@ def lambda_handler():
         driver = webdriver.Remote(command_executor="http://hub.lambdatest.com:80/wd/hub",options=chrome_options)
         #driver = webdriver.Remote(command_executor="https://standalone-chrome-latest-l6pp.onrender.com/wd/hub",options=chrome_options)
 
-        #https://standalone-chrome-latest-l6pp.onrender.com/
+
         print("abc") 
         cookieactive=0
     
