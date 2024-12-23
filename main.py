@@ -155,8 +155,8 @@ def lambda_handler():
         lt_options["plugin"] = "python-python";
         chrome_options.set_capability('LT:Options', lt_options);
 
-        driver = webdriver.Remote(command_executor="http://hub.lambdatest.com:80/wd/hub",options=chrome_options)
-        #driver = webdriver.Remote(command_executor="https://standalone-chrome-latest-l6pp.onrender.com/wd/hub",options=chrome_options)
+         #driver = webdriver.Remote(command_executor="http://hub.lambdatest.com:80/wd/hub",options=chrome_options)
+        driver = webdriver.Remote(command_executor="https://standalone-chrome-latest-l6pp.onrender.com/wd/hub",options=chrome_options)
 
 
         print("abc") 
