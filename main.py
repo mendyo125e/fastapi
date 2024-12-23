@@ -141,19 +141,19 @@ def lambda_handler():
             vonglap=False
         chrome_options = Options()
 
-        chrome_options.browser_version = "130"
-        chrome_options.platform_name = "Windows 10"
-        lt_options = {};
-        lt_options["username"] = "alexschmidt63ng";
-        lt_options["accessKey"] = "evq0nRPGqRSZOQtu2hcYW2xy18CgxDjUotY1vYFD491PfVxPcd";
-        lt_options["smartUI.project"] = "alexschmidt63ng";
-        lt_options["resolution"] = "1024x768";
-        lt_options["recordVideo"] = "true";
-        lt_options["browserName"] = "Chrome";
-        lt_options["w3c"] = True;
-        lt_options["selenium_version"] = "4.0.0";
-        lt_options["plugin"] = "python-python";
-        chrome_options.set_capability('LT:Options', lt_options);
+        #chrome_options.browser_version = "130"
+       #chrome_options.platform_name = "Windows 10"
+        #lt_options = {};
+        #lt_options["username"] = "alexschmidt63ng";
+        #lt_options["accessKey"] = "evq0nRPGqRSZOQtu2hcYW2xy18CgxDjUotY1vYFD491PfVxPcd";
+        #lt_options["smartUI.project"] = "alexschmidt63ng";
+        #lt_options["resolution"] = "1024x768";
+        #lt_options["recordVideo"] = "true";
+        #lt_options["browserName"] = "Chrome";
+        #lt_options["w3c"] = True;
+        #lt_options["selenium_version"] = "4.0.0";
+        #lt_options["plugin"] = "python-python";
+        #chrome_options.set_capability('LT:Options', lt_options);
 
          #driver = webdriver.Remote(command_executor="http://hub.lambdatest.com:80/wd/hub",options=chrome_options)
         driver = webdriver.Remote(command_executor="https://standalone-chrome-latest-l6pp.onrender.com/wd/hub",options=chrome_options)
