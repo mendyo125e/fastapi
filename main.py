@@ -139,66 +139,36 @@ def lambda_handler():
             url = "https://hieuphp.name.vn/api/undetected/updatestatus.php?all=1"  
             fetch_data_from_api(url)
             vonglap=False
-       
-        driver = webdriver.Remote(command_executor="https://standalone-chrome-latest-l6pp.onrender.com/wd/hub",options=chrome_options)
-        
+        chrome_options = Options()
+
+        chrome_options.browser_version = "130"
+        chrome_options.platform_name = "Windows 10"
+        lt_options = {};
+        lt_options["username"] = "alexschmidt63ng";
+        lt_options["accessKey"] = "evq0nRPGqRSZOQtu2hcYW2xy18CgxDjUotY1vYFD491PfVxPcd";
+        lt_options["smartUI.project"] = "alexschmidt63ng";
+        lt_options["resolution"] = "1024x768";
+        lt_options["recordVideo"] = "true";
+        lt_options["browserName"] = "Chrome";
+        lt_options["w3c"] = True;
+        lt_options["selenium_version"] = "4.0.0";
+        lt_options["plugin"] = "python-python";
+        chrome_options.set_capability('LT:Options', lt_options);
+
+        driver = webdriver.Remote(command_executor="http://hub.lambdatest.com:80/wd/hub",options=chrome_options)
+        #driver = webdriver.Remote(command_executor="https://standalone-chrome-latest-l6pp.onrender.com/wd/hub",options=chrome_options)
+
+        #https://standalone-chrome-latest-l6pp.onrender.com/
+        print("abc") 
         cookieactive=0
-            
-            #driver = uc.Chrome(options, driver_executable_path=driver_path, browser_executable_path=browser_path,version_main=108 )
-        if int(noidungtin)==1:
-            url="https://chat.chotot.com/chat"
-            driver.get(url)    
-            passtranglogin=0
-            try:
-            # Tìm phần tử chứa chữ "Đăng nhập"
-                login_element = driver.find_element(By.CSS_SELECTOR, ".styles_linkMessage__shp7Q")
-                passtranglogin=1
-                nologin=2
-                print("Bạn đã login page chat ")                 
-            except Exception as e:
-                print("Lỗi Không tìm thấy 'cookie chat' ")
-                nologin=1
-        else:    
-                url="https://www.chotot.com/my-ads"
-                driver.get(url)    
-                time.sleep(2) 
-                passtranglogin=0
-                try:
-                # Tìm phần tử chứa chữ "Đăng nhập"
-                    login_element = driver.find_element(By.CSS_SELECTOR, ".flex.whitespace-pre").text
-                    if login_element == "Tạo cửa hàng":
-                        print(f"{namefolder} Đã có cookie Chợ Tốt")  # Thông báo nếu tìm thấy
-                        passtranglogin=1
-                        nologin=3
-                        print("Bạn đã login danh sách sản phẩm")
-                except Exception as e:
-                    print("Lỗi Không tìm thấy 'cookie my-ads' ")
-                    nologin=4
-        time.sleep(1)   
-        if passtranglogin==0:
-            timeout = 3
-            end_time = time.time() + timeout
-            while True:
-                try:
-                # Tìm phần tử chứa chữ "Đăng nhập"
-                    login_element = driver.find_element(By.CSS_SELECTOR, ".mocked-styled-29.b13ldopu").text
-                    if login_element == "Đăng nhập":
-                        print(f"{namefolder} Chưa đăng nhập")  # Thông báo nếu tìm thấy
-                        cookieactive=1
-                        break
-                except Exception as e:
-                    print("Đợi load đăng nhập xong cái")
-                    time.sleep(1) 
-                if time.time() > end_time:
-                    print("Lỗi Không tìm thấy chữ 'Đăng nhập' thời gian tối đa")
-                    break
-        if int(viewtmp) == 1:
-                #os.system("ls /tmp")
-                print("dang xem tmp nha")
-                
+    
+        #driver = uc.Chrome(options, driver_executable_path=driver_path, browser_executable_path=browser_path,version_main=108 )
+        url="https://www.chotot.com/my-ads"
+        driver.get(url)    
+        nologin=2        
         time.sleep(1)
         dathemcookie=0
-        loithemcookie=0    
+        cookieactive=1   
         if int(cookieactive) == 1:
             for cookie in cookies:
                 cookie = convert_boolean_values(cookie)
@@ -240,7 +210,7 @@ def lambda_handler():
                 url = "https://hieuphp.name.vn/api/undetected/undetected.php?all=1"
                 updatestatus1=updatestatus(namefolder,url,getcookie)
                 print(f"update sesion theo namefolder: {updatestatus1}")
-        time.sleep(1000) 
+        time.sleep(0) 
         #fetch_data_from_api(url)      
         if int(testbodyelement) ==1:
             body_element = driver.find_element("tag name", "body").text
